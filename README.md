@@ -1,5 +1,15 @@
 # Inverted Index
 
+## System Design
+### Search Sequence
+![](assets/sequence_search.png)
+
+### Reindex Sequence
+![](assets/sequence_reindex.png)
+
+### Status Sequence
+![](assets/sequence_status.png)
+
 ## Build & Run
 After cloning repository, open up a terminal and make sure you have cmake downloaded on your system. Then make a new directory which will have the build files:
     
