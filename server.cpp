@@ -83,16 +83,14 @@ bool reindex_request_handler(int client_socket) {
     std::vector<std::string> file_names = get_file_names(FILES_DIR_PATH);
     std::vector<std::pair<std::size_t, std::size_t>> worker_bounds = get_bounds(file_names.size(), NUM_WORKERS);
 
-    std::vector<std::future<void>> futs;
     for (int i = 0; i < NUM_WORKERS; i++) {
         std::vector<std::string> temp;
         for (std::size_t j = worker_bounds[i].first; j <= worker_bounds[i].second; j++) {
             temp.push_back(file_names[j]);
         }
-        futs.push_back(workers.add_task(index_text_files, temp));
+        client_reindex_tasks[&client_socket].push_back(workers.add_task(index_text_files, temp));
     }
 
-    client_reindex_tasks[&client_socket] = std::move(futs);
     return true;
 }
 
